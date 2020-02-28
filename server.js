@@ -1,27 +1,14 @@
-const express = require("express");
-const layout = require("express-layout");
-const app = express();
-
-const router =  express.Router();
-
-const middlewares = [
-   layout(),
-   express.static("./public")
-  ];
-
-app.use(middlewares);
+const {app} = require("./app/routes");
 
 app.set("views", "./app/views");
 app.set("view engine", "ejs");
 
-router.route("/")
-       .get((req,res) => {
-         res.send("Hello, world");
-      });
+app.use((req, res) => {
+      res.status(404).send("Page not found.");
+   });
 
-router.route("/contact")
-      .get((req,res)=>{
-         res.render("contact");
-      });
+app.use((err, req, res) => {
+      res.status(500).send("Oh, something got broken !, We are working on it.");
+});
 
-module.exports = { app, router }
+module.exports = { app }
