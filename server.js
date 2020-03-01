@@ -1,8 +1,5 @@
 const {app} = require("./app/routes");
 
-app.set("views", "./app/views");
-app.set("view engine", "ejs");
-
 app.use((req, res) => {
       res.status(404).send("Page not found.");
    });
