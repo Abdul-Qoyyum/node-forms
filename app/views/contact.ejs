@@ -1,5 +1,4 @@
-<div class="error">
- <ul class="errors-list" >
+ <ul class="error errors-list" >
  
   <% if(errs.message){ %>
   <li><%=  errs.message %></li>
@@ -10,19 +9,28 @@
   <% } %>
 
  </ul>
-</div>
+
 
   <form action="/contact" method="post" novalidate>
-   <div class="form-header">
-    <h2>Contact Us</h2>
-   </div>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>" />  
+  <% var headerText = "" %>
+  <% Object.keys(errs).forEach(err => { %>
+  <% if(errs[err].length > 0) { %>
+    <% headerText = '<span class="error"> Oops,please correct the following field(s) :) </span>' %>
+  <% }else{ %>
+    <% headerText = "Contact Us" %>
+  <% } }); %>
 
-   <div class="form-field">
+  <div class="form-header">
+   <h2><%- headerText %></h2>
+  </div>
+
+   <div class="form-field <% if(errs.message){ %> form-field-invalid <% }%>">
      <label for="message">Message</label>
      <textarea class="input" name="message"></textarea>
    </div>
 
-   <div class="form-field">
+   <div class="form-field <% if(errs.email){%>form-field-invalid<% } %>">
      <label for="email">Email:</label>
      <input class="input" type="text" name="email" value="" />
    </div>

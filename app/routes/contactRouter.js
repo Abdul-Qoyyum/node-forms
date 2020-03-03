@@ -1,14 +1,18 @@
-const {check, validationResult } = require("express-validator");
+const {check, validationResult, matchedData } = require("express-validator");
+const csrf = require("csurf");
 
 exports.contactRouter = app => {
 
+let csrfProtection = csrf({cookie : true });
+
 app.route("/contact")
-            .get((req,res) => {
+            .get(csrfProtection,(req,res) => {
              res.render("contact",{
               errs : {
-               message : "" ,
+               message : "",
                email : ""
-                 }
+                 },
+               csrfToken : req.csrfToken()
               });
             })
             .post([
@@ -21,7 +25,7 @@ app.route("/contact")
                 .bail()
                 .normalizeEmail()
                 .withMessage("Invalid Email")
-              ],(req,res) => {
+              ],csrfProtection,(req,res) => {
       const error = validationResult(req);
    if(!error.isEmpty()){
       const { errors } = error;
@@ -31,11 +35,15 @@ app.route("/contact")
            errs[err.param] = err.msg
              });
 
-     return res.render("contact",{ errs });
+     return res.render("contact",{
+           errs,
+           csrfToken : req.csrfToken()
+ });
 
                 }
 
-     res.send("Thanks for your feedback.");
+    req.flash("success","Thanks for your feedback");
+    res.redirect("/");
             })
 
 }
