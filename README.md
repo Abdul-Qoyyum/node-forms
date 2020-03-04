@@ -4,7 +4,7 @@
 - Clone the `repo`
 - Run **npm-install**
 - Run **npm start**
-- Visit `**http://localhost:3000/contact**`
+- Visit ` ** http://localhost:3000/contact ** `
 
 
 # MIT License
