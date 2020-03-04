@@ -4,12 +4,12 @@
 - Clone the `repo`
 - Run **npm-install**
 - Run **npm start**
-- Visit ` ** http://localhost:3000/contact ** `
+- Visit  ` http://localhost:3000/contact `
 
 
 # MIT License
 
-## Copyright (c) 2020 Abdul Qoyyum
+###  Copyright (c) 2020 Abdul Qoyyum
 
 Permission is hereby granted, free of charge, t$
 of this software and associated documentation f$
