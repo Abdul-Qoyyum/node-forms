@@ -12,7 +12,11 @@ app.route("/contact")
                message : "",
                email : ""
                  },
-               csrfToken : req.csrfToken()
+               csrfToken : req.csrfToken(),
+               data : {
+                message : "",
+                email : ""
+                }
               });
             })
             .post([
@@ -37,10 +41,15 @@ app.route("/contact")
 
      return res.render("contact",{
            errs,
-           csrfToken : req.csrfToken()
+           csrfToken : req.csrfToken(),
+           data : req.body
  });
 
                 }
+
+    const info = matchedData(req);
+    //grab the user details and use it to send message
+    console.log(info);
 
     req.flash("success","Thanks for your feedback");
     res.redirect("/");

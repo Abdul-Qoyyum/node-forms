@@ -27,12 +27,12 @@
 
    <div class="form-field <% if(errs.message){ %> form-field-invalid <% }%>">
      <label for="message">Message</label>
-     <textarea class="input" name="message"></textarea>
+     <textarea class="input" name="message"><%= data.message %></textarea>
    </div>
 
    <div class="form-field <% if(errs.email){%>form-field-invalid<% } %>">
      <label for="email">Email:</label>
-     <input class="input" type="text" name="email" value="" />
+     <input class="input" type="text" name="email" value="<%= data.email %>" />
    </div>
 
    
